@@ -1,0 +1,5 @@
+merkle:
+  merkle_end_point_url: https://api-stage.500friends.com/
+  uuid: 6368bf5842b80d
+  secret_key: 93c45a6f0bdce2a9941ab54d7680f7fb
+  merkle_version: 2019-01-01
