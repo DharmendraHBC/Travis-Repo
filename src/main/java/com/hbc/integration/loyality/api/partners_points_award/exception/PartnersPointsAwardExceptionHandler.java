@@ -29,7 +29,7 @@ public class PartnersPointsAwardExceptionHandler extends ResponseEntityException
 
 	}
 
-	@ExceptionHandler(RuntimeException.class)
+	@ExceptionHandler(Throwable.class)
 	public ResponseEntity<ApiError> handleRunTime(RuntimeException ex) {
 
 		ApiError error = new ApiError();
