@@ -15,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.hbc.integration.loyality.api.partners_points_award.model.ApiError;
+import com.hbc.integration.loyality.api.partners_points_award.model.ErrorResponse;
 
 @ControllerAdvice
 public class PartnersPointsAwardExceptionHandler extends ResponseEntityExceptionHandler {
@@ -23,20 +24,21 @@ public class PartnersPointsAwardExceptionHandler extends ResponseEntityException
 	public ResponseEntity<ApiError> handlePartnersPointsAwardException(PartnersPointsAwardException ex) {
 
 		ApiError error = new ApiError();
-		error.setMessage(ex.getMessage());
-		error.setCode(ex.getCode());
-		return new ResponseEntity<ApiError>(error, HttpStatus.BAD_REQUEST);
-
+		error.setSuccess(false);
+		if (ex.getCode() == null)
+			error.setError_response(new ErrorResponse(ex.getMessage(), "PPA-222"));
+		else
+			error.setError_response(new ErrorResponse(ex.getMessage(), ex.getCode()));
+		return new ResponseEntity<ApiError>(error, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(Throwable.class)
 	public ResponseEntity<ApiError> handleRunTime(RuntimeException ex) {
 
 		ApiError error = new ApiError();
-		error.setMessage(ex.getMessage());
-		error.setCode("RN-108");
+		error.setSuccess(false);
+		error.setError_response(new ErrorResponse(ex.getMessage(), "PPA-333"));
 		return new ResponseEntity<ApiError>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-
 	}
 
 	/**
@@ -51,7 +53,7 @@ public class PartnersPointsAwardExceptionHandler extends ResponseEntityException
 		List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(x -> x.getDefaultMessage())
 				.collect(Collectors.toList());
 		body.put("errors", errors);
-		return new ResponseEntity<>(body, headers, status);
+		return new ResponseEntity<>(body, headers, HttpStatus.BAD_REQUEST);
 	}
 
 }

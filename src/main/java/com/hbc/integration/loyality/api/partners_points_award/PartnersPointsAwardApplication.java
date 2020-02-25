@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.hbc.integration.loyality.common.util.MD5;
+
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -34,5 +36,10 @@ public class PartnersPointsAwardApplication {
 	public Docket getDocketInstance() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.withClassAnnotation(RestController.class)).build();
+	}
+	
+	@Bean
+	public MD5 mD5() {
+		return new MD5();
 	}
 }

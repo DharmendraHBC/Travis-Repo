@@ -14,4 +14,6 @@ public class Data implements Serializable {
 	
 	private int code;
 	private String message;
+	private int id;
+	private int points;
 }

@@ -30,8 +30,7 @@ public class PartnersPointsAwardRequest implements Serializable {
 	private String points_awarded;
 
 	@NotBlank(message = "transaction_date can't be null or empty")
-	@CheckDateFormat(pattern = "yyyyMMdd", message = "invalid transaction_date format")
-//	@DateTimeFormat(pattern = "yyyyMMdd",)
+	@CheckDateFormat(pattern = "YYYYMMDD", message = "invalid transaction_date format")
 	private String transaction_date;
 
 	@NotBlank(message = "transaction_time can't be null or empty")

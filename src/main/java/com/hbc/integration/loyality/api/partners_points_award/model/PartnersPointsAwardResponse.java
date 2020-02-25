@@ -10,6 +10,8 @@ public class PartnersPointsAwardResponse implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1673154148017958429L;
-	
+
 	private boolean success;
+
+	private int points;
 }
